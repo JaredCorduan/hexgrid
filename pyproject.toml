@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hexgrid"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPL-3.0-or-later"
+keywords = []
+authors = [
+  { name = "Jared Corduan", email = "jaredcorduan@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "pygame==2.6.1",
+  "pyyaml==6.0.2",
+]
+
+[project.urls]
+Documentation = "https://github.com/Jared Corduan/hexgrid#readme"
+Issues = "https://github.com/Jared Corduan/hexgrid/issues"
+Source = "https://github.com/Jared Corduan/hexgrid"
+
+[project.scripts]
+hexgrid = "hexgrid.main:main"
+
+[tool.hatch.version]
+path = "src/hexgrid/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/hexgrid tests}"
+
+[tool.coverage.run]
+source_pkgs = ["hexgrid", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/hexgrid/__about__.py",
+]
+
+[tool.coverage.paths]
+hexgrid = ["src/hexgrid", "*/hexgrid/src/hexgrid"]
+tests = ["tests", "*/hexgrid/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
